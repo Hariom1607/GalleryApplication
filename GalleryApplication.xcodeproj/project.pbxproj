@@ -6,6 +6,14 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		AD0531143010973C005AA1D6 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = AD0531133010973C005AA1D6 /* GoogleSignIn */; };
+		AD0531163010973C005AA1D6 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = AD0531153010973C005AA1D6 /* GoogleSignInSwift */; };
+		AD05311930109786005AA1D6 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = AD05311830109786005AA1D6 /* FirebaseAuth */; };
+		AD05311B30109786005AA1D6 /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = AD05311A30109786005AA1D6 /* FirebaseCore */; };
+		AD474E223010D9200084D2ED /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = AD474E213010D9200084D2ED /* Kingfisher */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		AD6157A6300F92C800AFA01F /* GalleryApplication.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GalleryApplication.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -36,6 +44,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AD0531143010973C005AA1D6 /* GoogleSignIn in Frameworks */,
+				AD05311930109786005AA1D6 /* FirebaseAuth in Frameworks */,
+				AD05311B30109786005AA1D6 /* FirebaseCore in Frameworks */,
+				AD0531163010973C005AA1D6 /* GoogleSignInSwift in Frameworks */,
+				AD474E223010D9200084D2ED /* Kingfisher in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,6 +91,11 @@
 			);
 			name = GalleryApplication;
 			packageProductDependencies = (
+				AD0531133010973C005AA1D6 /* GoogleSignIn */,
+				AD0531153010973C005AA1D6 /* GoogleSignInSwift */,
+				AD05311830109786005AA1D6 /* FirebaseAuth */,
+				AD05311A30109786005AA1D6 /* FirebaseCore */,
+				AD474E213010D9200084D2ED /* Kingfisher */,
 			);
 			productName = GalleryApplication;
 			productReference = AD6157A6300F92C800AFA01F /* GalleryApplication.app */;
@@ -107,6 +125,11 @@
 			);
 			mainGroup = AD61579D300F92C800AFA01F;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				AD0531123010973C005AA1D6 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
+				AD05311730109786005AA1D6 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				AD474E203010D9200084D2ED /* XCRemoteSwiftPackageReference "Kingfisher" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = AD6157A7300F92C800AFA01F /* Products */;
 			projectDirPath = "";
@@ -152,6 +175,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -159,9 +183,13 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.MultipleTarget.GalleryApplication;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -179,6 +207,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -186,9 +215,13 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.MultipleTarget.GalleryApplication;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -333,6 +366,61 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		AD0531123010973C005AA1D6 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/google/GoogleSignIn-iOS";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.2.0;
+			};
+		};
+		AD05311730109786005AA1D6 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 12.16.0;
+			};
+		};
+		AD474E203010D9200084D2ED /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.11.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		AD0531133010973C005AA1D6 /* GoogleSignIn */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AD0531123010973C005AA1D6 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
+			productName = GoogleSignIn;
+		};
+		AD0531153010973C005AA1D6 /* GoogleSignInSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AD0531123010973C005AA1D6 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
+			productName = GoogleSignInSwift;
+		};
+		AD05311830109786005AA1D6 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AD05311730109786005AA1D6 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		AD05311A30109786005AA1D6 /* FirebaseCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AD05311730109786005AA1D6 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCore;
+		};
+		AD474E213010D9200084D2ED /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AD474E203010D9200084D2ED /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = AD61579E300F92C800AFA01F /* Project object */;
 }
