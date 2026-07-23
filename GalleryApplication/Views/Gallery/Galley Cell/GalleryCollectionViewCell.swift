@@ -26,13 +26,14 @@ class GalleryCollectionViewCell: UICollectionViewCell {
     }
     
     func configure(with image: ImageModel) {
-        // OFFLINE IMAGE
-        if let fileName = image.localImagePath,
-           let localURL = ImageStorageManager.shared.getLocalURL(for: fileName),
-           FileManager.default.fileExists(atPath: localURL.path) {
-            
-            imgGallery.image = UIImage(contentsOfFile: localURL.path)
-            return
+        // OFFLINE IMAGE — resolve relative filename or last path component dynamically against current Documents directory
+        if let pathOrName = image.localImagePath {
+            let fileName = (pathOrName as NSString).lastPathComponent
+            if let localURL = ImageStorageManager.shared.getLocalURL(for: fileName),
+               FileManager.default.fileExists(atPath: localURL.path) {
+                imgGallery.image = UIImage(contentsOfFile: localURL.path)
+                return
+            }
         }
         
         // ONLINE IMAGE

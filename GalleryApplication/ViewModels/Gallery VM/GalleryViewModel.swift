@@ -24,7 +24,7 @@ final class GalleryViewModel {
         guard !isLoading else { return }
         guard hasMoreData else { return }
         
-        // Always show cached data first
+        // Show cached data on first load
         if images.isEmpty {
             loadOfflineImages()
         }
@@ -36,29 +36,33 @@ final class GalleryViewModel {
             
             guard let self = self else { return }
             
-            self.isLoading = false
-            self.onLoadingStateChanged?(false)
-            
             switch result {
                 
             case .success(let newImages):
                 
                 if newImages.isEmpty {
                     self.hasMoreData = false
+                    self.isLoading = false
+                    self.onLoadingStateChanged?(false)
                     return
                 }
+                // Advance page BEFORE saving, so any subsequent scroll
+                // triggers the correct next page fetch
+                self.currentPage += 1
                 self.saveImages(newImages)
                 
             case .failure:
-                print("Showing cached images")
+                self.isLoading = false
+                self.onLoadingStateChanged?(false)
+                print("Network failed — showing cached images")
                 
             }
         }
     }
     
     func loadMoreIfNeeded(currentIndex: Int) {
-        
-        if currentIndex >= images.count - 4 {
+        let threshold = max(images.count - 4, 0)
+        if currentIndex >= threshold {
             fetchImages()
         }
     }
@@ -67,32 +71,42 @@ final class GalleryViewModel {
         
         images = DatabaseManager.shared.fetchImages()
         
-        currentPage = (images.count / Constants.pageLimit) + 1
+        // Restore the correct next page based on how many images are cached
+        if !images.isEmpty {
+            currentPage = (images.count / Constants.pageLimit) + 1
+        }
         
-        print("Offline:", images.count)
-        print("Next Page:", currentPage)
+        print("Offline images loaded: \(images.count), next page: \(currentPage)")
         
         onDataUpdated?()
-        
     }
     
     private func saveImages(_ apiImages: [ImageModel]) {
         
-        let group = DispatchGroup()
-        var anyNewImageSaved = false
+        // Separate new images (not yet in DB) from already-cached ones
+        let newImages = apiImages.filter {
+            !DatabaseManager.shared.imageExists(id: $0.id)
+        }
         
-        for image in apiImages {
-            if DatabaseManager.shared.imageExists(id: image.id) {
-                continue
-            }
-            anyNewImageSaved = true
+        // If every image on this page is already cached, just refresh the UI
+        // and release the loading lock — no downloads needed
+        guard !newImages.isEmpty else {
+            self.images = DatabaseManager.shared.fetchImages()
+            self.isLoading = false
+            self.onLoadingStateChanged?(false)
+            self.onDataUpdated?()
+            return
+        }
+        
+        // Download and persist only the new images
+        let group = DispatchGroup()
+        
+        for image in newImages {
             group.enter()
-            
             ImageStorageManager.shared.saveImage(
                 from: image.download_url,
                 imageId: image.id
             ) { localPath in
-                
                 defer { group.leave() }
                 
                 guard let localPath else { return }
@@ -103,22 +117,12 @@ final class GalleryViewModel {
             }
         }
         
+        // Called once — after ALL downloads for this page complete
         group.notify(queue: .main) {
-            // Advance to the next page only after all images from this page are processed
-            self.currentPage += 1
-            
-            if anyNewImageSaved {
-                // Refresh the image list from DB and notify the view
-                self.images = DatabaseManager.shared.fetchImages()
-                self.onDataUpdated?()
-            }
-            
-            if !anyNewImageSaved {
-                // All images on this page already existed — mark no more new data
-                // to avoid fetching the same page repeatedly, then try the next page
-                self.hasMoreData = self.currentPage <= 100 // picsum supports up to ~100 pages
-                self.fetchImages()
-            }
+            self.images = DatabaseManager.shared.fetchImages()
+            self.isLoading = false
+            self.onLoadingStateChanged?(false)
+            self.onDataUpdated?()
         }
     }
 }

@@ -59,7 +59,7 @@ final class ImageStorageManager {
                 try jpegData.write(to: localURL)
 
                 DispatchQueue.main.async {
-                    completion(localURL.path)
+                    completion(fileName)
                 }
 
             } catch {
