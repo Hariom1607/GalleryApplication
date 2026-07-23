@@ -14,6 +14,7 @@ class GalleryCollectionViewCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        imgGallery.layer.cornerRadius = 14
         imgGallery.contentMode = .scaleAspectFill
         imgGallery.clipsToBounds = true
     }
